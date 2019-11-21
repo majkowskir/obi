@@ -222,3 +222,57 @@ print(max(f_Ewaluacja(ostatnie_pokolenie)))
 # średnie wartości ewaluacji dla kolejnych pokoleń
 print(*wartosc_srednia_ew, sep="\n")
 
+def form_button():
+    global iteracja 
+    global wartosc_srednia_ew
+    
+    global pop_size
+    global Gen
+    
+    pop_size=int(form_pop_size.get())
+    Gen = int(form_gen.get())
+    
+    iteracja =0
+    wartosc_srednia_ew=[]
+    
+    start = time.time()
+    ostatnie_pokolenie=f_Pokolenie(pierwsze_pokolenie)
+    end = time.time()
+
+    the_chosen_one = max(f_Ewaluacja(ostatnie_pokolenie))
+    form_max_value.set(the_chosen_one)
+    print("guru is happy")
+    
+root=tk.Tk()
+
+root.title("Laboratorium 3: Algorytm genetyczny, wyznaczanie max funkcji. R.Majkowski (233256), M. Witomski (233270)")
+root.configure(bg='white', padx=20, pady=20)
+
+form_pop_size = StringVar()
+form_pop_size.set(pop_size)
+tk.Entry(root, bg="white", textvariable=form_pop_size).grid(row=0, column=0, padx=10, sticky=tk.W)
+tk.Label(root, text="Liczba osobników: ", bg="white", padx = 10).grid(row=1, column=0, padx=10, sticky=tk.W)
+
+form_gen = StringVar()
+form_gen.set(Gen)
+tk.Entry(root, bg="white", textvariable=form_gen).grid(row=0, column=1, padx=10, sticky=tk.W)
+tk.Label(root, text="Liczba pokoleń: ", bg="white", padx = 10).grid(row=1, column=1, padx=10, sticky=tk.W)
+
+form_Pcross = StringVar()
+form_Pcross.set(Pc)
+tk.Entry(root, bg="white", textvariable=form_Pcross).grid(row=0, column=2, padx=10, sticky=tk.W)
+tk.Label(root, text="P. krzyżowania: ", bg="white", padx = 10).grid(row=1, column=2, padx=10, sticky=tk.W)
+
+form_Pmutation = StringVar()
+form_Pmutation.set(Pm)
+tk.Entry(root, bg="white", textvariable=form_Pmutation).grid(row=0, column=3, padx=10, sticky=tk.W)
+tk.Label(root, text="P. mutacji: ", bg="white", padx = 10).grid(row=1, column=3, padx=10, sticky=tk.W)
+
+tk.Button(text="Uruchom", command=form_button).grid(row=0, column=4, padx=10, sticky=tk.W)
+
+form_max_value = StringVar()
+form_max_value.set(the_chosen_one)
+tk.Label(root, textvariable=form_max_value, bg="white", padx = 10).grid(row=2, column=0, padx=10, sticky=tk.W)
+
+root.mainloop()
+
